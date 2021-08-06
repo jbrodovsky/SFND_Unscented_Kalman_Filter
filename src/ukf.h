@@ -4,6 +4,7 @@
 #include "Eigen/Dense"
 #include "measurement_package.h"
 
+#include <iostream>
 #include <vector>
 
 class UKF {
@@ -43,15 +44,18 @@ class UKF {
    */
   void UpdateRadar(MeasurementPackage meas_package);
 
+  //void GenerateSigmaPoints();
+  
   /**
    * @brief The propagation model f(x, nu)
    *
    * @param point Inidividual sigma point to propagate
    * @param nu Process noise model
    */
-  Eigen::VectorXd Propagate(Eigen::VectorXd& x, double& detla_t);
+  //Eigen::VectorXd Propagate(Eigen::VectorXd point, double dt);
+  //Eigen::MatrixXd PredictRadarMeasurement(MeasurementPackage meas_package);
+  //Eigen::MatrixXd PredictLidarMeasurement(MeasurementPackage meas_package);
 
-  Eigen::MatrixXd GenerateSigmaPoints(Eigen::VectorXd& x_augmented, Eigen::MatrixXd& P_augmented);
   // initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
 
@@ -107,7 +111,12 @@ class UKF {
   double lambda_;
 
   // Sigma size
-  double n_sigma_;
+  int n_sigma_;
+
+  // Radar Process Noise
+  Eigen::MatrixXd R_Radar;
+  // Laser Process Noise
+  Eigen::MatrixXd R_Laser;
 };
 
 #endif  // UKF_H
