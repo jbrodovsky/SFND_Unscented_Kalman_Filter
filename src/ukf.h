@@ -41,6 +41,8 @@ class UKF {
    */
   void UpdateRadar(MeasurementPackage meas_package);
 
+  //void GenerateSigmaPoints();
+  
   /**
    * @brief Initialize UKF from initial measurement
    * 
